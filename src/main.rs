@@ -3,7 +3,11 @@ extern crate lopdf;
 use lopdf::content::{Content, Operation};
 use lopdf::{Document, Object, Stream};
 
-fn main() {
+mod barcode;
+
+use barcode::run_barcode;
+
+fn run_create() {
     let mut doc = Document::with_version("1.5");
     let pages_id = doc.new_object_id();
     let font_id = doc.add_object(dictionary! {
@@ -46,4 +50,8 @@ fn main() {
     doc.trailer.set("Root", catalog_id);
     doc.compress();
     doc.save("example.pdf").unwrap();
+}
+
+fn main() {
+    run_barcode()
 }
